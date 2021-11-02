@@ -13,9 +13,12 @@ examples_dir = Path(__file__).parent / "examples"
 def test_from_directories(path):
     schema_path = examples_dir / path / "schema.graphql"
     resolvers_path = examples_dir / path / "expected-resolvers.py"
-    types_path = resolvers_path = examples_dir / path / "expected-types.py"
+    expected_types_path = resolvers_path = examples_dir / path / "expected-types.py"
+    types_path = resolvers_path = examples_dir / path / "types.py"
     runner = CliRunner()
     result = runner.invoke(
-        dazbog, [str(schema_path), str(resolvers_path), str(types_path)]
+        dazbog, [str(schema_path)]
     )
     assert result.exception is None
+
+    assert open(expected_types_path).read() == open(types_path).read()
