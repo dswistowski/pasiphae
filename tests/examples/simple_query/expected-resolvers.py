@@ -11,6 +11,4 @@ def query_resolve_field_foo(_: None, _info: GraphQLResolveInfo) -> str:
     raise NotImplementedError("Dazbog generated resolver")
 
 
-resolvers = [
-    query
-]
+resolvers = [query]

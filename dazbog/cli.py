@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import IO
-
+import itertools as it
 import click
 from graphql import GraphQLSyntaxError
 from graphql import parse
@@ -9,26 +9,24 @@ from dazbog.types import generate_types
 
 
 @click.command()
-@click.argument("schema", type=click.File("rt"))
-@click.argument("types", type=click.Path())
-@click.argument("resolvers", type=click.Path())
+@click.argument("schema", type=click.Path(path_type=Path))
 @click.option("--debug/--no-debug", default=False)
-def dazbog(schema: IO[str], types: Path, resolvers: Path, debug: bool) -> int:
+def dazbog(schema: Path, debug: bool):
     """Generate TYPES and update RESOLVERS from SCHEMA
 
     SCHEMA is path to source graphql schema
-    TYPES is path to result expected-types.py module
-    RESOLVERS is path to result resolvers module
     """
+    with open(schema) as f:
+        schema_data = f.read()
     try:
-        parsed_schema = parse(schema.read())
+        parsed_schema = parse(schema_data)
     except GraphQLSyntaxError as e:
         click.echo(f"Failed to parse schema - {e}")
         if debug:
             raise
         raise SystemExit(1)
 
-    # types = "\n".join(generate_types(parsed_schema))
-    for line in generate_types(parsed_schema):
-        print(line)
-    # print(types)
+    types = '\n'.join(generate_types(parsed_schema))
+    types_file = schema.parent / "types.py"
+    with open(types_file, "w") as f:
+        f.write(types)
