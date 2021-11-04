@@ -31,9 +31,9 @@ jobs:
         python -m pip install poetry==1.1.11
         python -m poetry install
     - uses: mtkennerly/dunamai-action@v1
-        with:
-          env-var: VERSION
-          args: --style semver
+      with:
+        env-var: VERSION
+        args: --style semver
     - name: Run build
       run: |
           python -m poetry version $VERSION
