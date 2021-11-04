@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "dazbog"
-version = "0.1.0"
-description = "Generate types and resolvers for ariadne from grapql schema"
+name = "pasiphae"
+version = "1.0.0"
+description = "Generate and update ariadne service from graphql schema"
 authors = ["Damian Świstowski <damian@swistowski.org>"]
 license = "MIT"
 
@@ -16,7 +16,31 @@ pytest = "^6.2.5"
 black = "^21.10b0"
 ariadne = "^0.13.0"
 mypy = "^0.910"
+flake8 = "^4.0.1"
+twine = "^3.5.0"
+Sphinx = "^4.2.0"
+coverage = "^6.1.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+force_single_line = true
+profile = "hug"
+src_paths = ["pasiphae", "test"]
+
+[tool.mypy]
+follow_imports = "normal"
+show_error_context = true
+check_untyped_defs = true
+disallow_incomplete_defs = true
+cache_dir = "/dev/null"
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_incomplete_stub = true
+warn_unused_ignores = true
+strict_optional = true
+no_implicit_optional = true
+strict_equality = true
+pretty = true
