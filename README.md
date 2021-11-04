@@ -1,3 +1,0 @@
-# Dazbog
-
-Work in progress
