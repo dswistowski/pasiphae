@@ -1,9 +1,12 @@
 [tool.poetry]
 name = "pasiphae"
-version = "1.0.0"
+version = "0.0.1"
 description = "Generate and update ariadne service from graphql schema"
 authors = ["Damian Świstowski <damian@swistowski.org>"]
 license = "MIT"
+
+[tool.poetry.scripts]
+pasiphae = "pasiphae.cli:pasiphae"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4"
