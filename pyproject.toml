@@ -4,6 +4,22 @@ version = "0.0.1"
 description = "Generate and update ariadne service from graphql schema"
 authors = ["Damian Świstowski <damian@swistowski.org>"]
 license = "MIT"
+include = ["svarog/py.typed"]
+repository = "https://gitlab.com/dswistowski/pasiphae/"
+readme = "README.rst"
+keywords = ["pasiphae", "graphql", "ariadne", "autogeneration"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+]
+
 
 [tool.poetry.scripts]
 pasiphae = "pasiphae.cli:pasiphae"
