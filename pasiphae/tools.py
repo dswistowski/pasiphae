@@ -24,7 +24,3 @@ def with_last(items: t.Sequence[T]) -> t.Iterator[t.Tuple[T, bool]]:
         prev = current
     if not is_first:
         yield prev, True
-
-
-def foo(a: int, b: str) -> bool:
-    return a == b
