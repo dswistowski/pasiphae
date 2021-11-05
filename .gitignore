@@ -3,6 +3,7 @@
 .python-version
 __pycache__
 tests/examples/**/in/types.py
+tests/examples/**/in/resolvers.py
 dist/
 .coverage
 docs/_build
