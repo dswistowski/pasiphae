@@ -120,7 +120,7 @@ class ObjectResolver(Resolver):
         else:
             yield super().body
         for function in self.functions:
-            yield f"@{self.name}.field"
+            yield f'@{self.name}.field("{function.schema_name}")'
             yield function.render(resolver=self)
 
     @property

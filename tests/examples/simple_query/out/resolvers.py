@@ -24,45 +24,45 @@ from .types import Starship
 query = QueryType()
 
 
-@query.field
+@query.field("hero")
 def resolve_query_hero(
     _: None, info: GraphQLResolveInfo, episode: Episode = Episode.NEWHOPE
 ) -> Optional[Character]:
     ...
 
 
-@query.field
+@query.field("reviews")
 def resolve_query_reviews(
     _: None, info: GraphQLResolveInfo, episode: Episode
 ) -> Sequence[Optional[Review]]:
     ...
 
 
-@query.field
+@query.field("search")
 def resolve_query_search(
     _: None, info: GraphQLResolveInfo, text: str
 ) -> Sequence[Optional[SearchResult]]:
     ...
 
 
-@query.field
+@query.field("character")
 def resolve_query_character(
     _: None, info: GraphQLResolveInfo, id: UUID
 ) -> Optional[Character]:
     ...
 
 
-@query.field
+@query.field("droid")
 def resolve_query_droid(_: None, info: GraphQLResolveInfo, id: UUID) -> Optional[Droid]:
     ...
 
 
-@query.field
+@query.field("human")
 def resolve_query_human(_: None, info: GraphQLResolveInfo, id: UUID) -> Optional[Human]:
     ...
 
 
-@query.field
+@query.field("starship")
 def resolve_query_starship(
     _: None, info: GraphQLResolveInfo, id: UUID
 ) -> Optional[Starship]:
@@ -72,7 +72,7 @@ def resolve_query_starship(
 mutation = MutationType()
 
 
-@mutation.field
+@mutation.field("createReview")
 def resolve_mutation_create_review(
     _: None, info: GraphQLResolveInfo, episode: Episode, review: ReviewInput
 ) -> Optional[Review]:
@@ -86,14 +86,14 @@ length_unit = EnumType("LengthUnit", values=LengthUnit)
 human = ObjectType("Human")
 
 
-@human.field
+@human.field("height")
 def resolve_human_height(
     human_: Human, info: GraphQLResolveInfo, unit: LengthUnit = LengthUnit.METER
 ) -> Decimal:
     ...
 
 
-@human.field
+@human.field("friendsConnection")
 def resolve_human_friends_connection(
     human_: Human, info: GraphQLResolveInfo, first: Optional[int], after: Optional[UUID]
 ) -> FriendsConnection:
@@ -103,7 +103,7 @@ def resolve_human_friends_connection(
 droid = ObjectType("Droid")
 
 
-@droid.field
+@droid.field("friendsConnection")
 def resolve_droid_friends_connection(
     droid_: Droid, info: GraphQLResolveInfo, first: Optional[int], after: Optional[UUID]
 ) -> FriendsConnection:
@@ -121,7 +121,7 @@ review = ObjectType("Review")
 starship = ObjectType("Starship")
 
 
-@starship.field
+@starship.field("length")
 def resolve_starship_length(
     starship_: Starship, info: GraphQLResolveInfo, unit: LengthUnit = LengthUnit.METER
 ) -> Decimal:

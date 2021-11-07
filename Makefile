@@ -1,4 +1,4 @@
-PHONY: clean clean-test clean-pyc clean-build docs help
+PHONY: clean clean-test clean-pyc clean-build docs help reformat pre-commit sort-imports typecheck
 .DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
@@ -74,3 +74,8 @@ typecheck:  ## run mypy type checking
 
 sort-imports: ## use isort to reorder imports
 	isort .
+
+reformat:  ## reformat code
+	black .
+
+pre-commit: clean reformat sort-imports test-all  ## cleanups to run before commit
