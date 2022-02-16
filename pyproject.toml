@@ -42,7 +42,7 @@ flake8 = "^4.0.1"
 Sphinx = "^4.2.0"
 coverage = "^6.1.1"
 isort = "^5.10.0"
-uvicorn = {extras = ["standard"], version = "^0.15.0"}
+uvicorn = {extras = ["standard"], version = "^0.17.5"}
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
