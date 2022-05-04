@@ -12,11 +12,9 @@ from .to_python_type import to_python_type
 from .tools import camel_to_snake
 from .tools import has_arguments
 
-UNION_WEIGHT, ENUM_WEIGHT, PROTOCOL_WEIGHT, DEFAULT_WEIGHT = range(4)
-
+SCALAR_WEIGHT, UNION_WEIGHT, ENUM_WEIGHT, PROTOCOL_WEIGHT, DEFAULT_WEIGHT = range(5)
 
 MODULE = ".types"
-
 
 render_type = operator.methodcaller("render", module=MODULE)
 
@@ -24,6 +22,12 @@ render_type = operator.methodcaller("render", module=MODULE)
 @singledispatch
 def get_name_node(node: ast.DefinitionNode) -> t.Optional[ast.NameNode]:
     raise NotImplementedError(f"Should never process not node: {node}")
+
+
+@get_name_node.register(ast.SchemaDefinitionNode)
+@get_name_node.register(ast.DirectiveDefinitionNode)
+def ignore_nodes(node: ast.DefinitionNode) -> t.Optional[ast.NameNode]:
+    return None
 
 
 @get_name_node.register(ast.ExecutableDefinitionNode)
@@ -61,6 +65,12 @@ def process_definition(
     definition: ast.DefinitionNode, _known_types: t.Mapping[str, str]
 ) -> t.Optional[CodeBlock]:
     raise NotImplementedError(f"Cannot process {definition.__class__}")
+
+
+@process_definition.register(ast.SchemaDefinitionNode)
+@process_definition.register(ast.DirectiveDefinitionNode)
+def ignore_processing(node: ast.DefinitionNode, _: t.Mapping) -> None:
+    return None
 
 
 @singledispatch
@@ -127,7 +137,6 @@ def process_interface_or_object(
     weight: int,
     type_: PythonType,
 ) -> CodeBlock:
-
     process_results: t.Mapping[str, PythonType] = {
         field.name.value: to_python_type(field.type, known_types)
         for field in definition.fields
@@ -193,4 +202,20 @@ def process_union(
             PythonType(union.name.value, module=MODULE),
         ],
         weight=UNION_WEIGHT,
+    )
+
+
+@process_definition.register
+def process_scalar(
+    definition: ast.ScalarTypeDefinitionNode, known: t.Mapping[str, str]
+) -> CodeBlock:
+
+    return CodeBlock(
+        body="",
+        weight=SCALAR_WEIGHT,
+        used_types=[
+            PythonType(definition.name.value, module=".scalars"),
+            PythonType(definition.name.value, module=MODULE),
+        ],
+        warning=f"Scalar {definition.name.value} defined. Make sure you provide scalar implementation in `scalars` module",
     )

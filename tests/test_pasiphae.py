@@ -18,7 +18,9 @@ def test_from_directories(path):
 
     schema_path = in_path / "schema.graphql"
     runner = CliRunner()
-    result = runner.invoke(pasiphae, [str(schema_path), "--app"])
+    result = runner.invoke(
+        pasiphae, [str(schema_path), "--app"], catch_exceptions=False
+    )
     assert result.exception is None
 
     assert listdir(in_path) == listdir(

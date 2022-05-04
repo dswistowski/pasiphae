@@ -173,6 +173,14 @@ object_type_overrides: t.Mapping[str, ResolverType] = {
 }
 
 
+@process_definition.register(ast.SchemaDefinitionNode)
+@process_definition.register(ast.DirectiveDefinitionNode)
+def do_not_processed(
+    definition: ast.DefinitionNode, known_types: t.Mapping[str, str]
+) -> None:
+    return None
+
+
 @process_definition.register(ast.ObjectTypeDefinitionNode)
 def process_object(
     definition: ast.ObjectTypeDefinitionNode, known_types: t.Mapping[str, str]
@@ -219,6 +227,14 @@ def process_union(
     definition: ast.UnionTypeDefinitionNode, known_types: t.Mapping[str, str]
 ) -> t.Optional[Resolver]:
     # TODO: create union processor
+    return None
+
+
+@process_definition.register
+def process_scalar(
+    defiinition: ast.ScalarTypeDefinitionNode, known_types: t.Mapping[str, str]
+) -> t.Optional[Resolver]:
+    # TODO: create scalar processor
     return None
 
 
