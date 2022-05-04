@@ -1,8 +1,8 @@
+import itertools as it
 from pathlib import Path
 
 import click
 import graphql
-import itertools as it
 
 from . import file
 from .resolvers import generate_resolvers
