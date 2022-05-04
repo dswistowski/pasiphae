@@ -217,5 +217,6 @@ def process_scalar(
             PythonType(definition.name.value, module=".scalars"),
             PythonType(definition.name.value, module=MODULE),
         ],
-        warning=f"Scalar {definition.name.value} defined. Make sure you provide scalar implementation in `scalars` module",
+        warning=f"Scalar {definition.name.value} defined. "
+        f"Make sure you provide scalar implementation in `scalars` module",
     )
