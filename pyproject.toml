@@ -39,7 +39,7 @@ black = "^21.10b0"
 ariadne = {git = "https://github.com/mirumee/ariadne", rev = "1cdc600431378be8c09f0d13428b56ee2451727a"}
 mypy = "^0.910"
 flake8 = "^4.0.1"
-Sphinx = "^4.2.0"
+Sphinx = "^4.5.0"
 coverage = "^6.3.2"
 isort = "^5.10.0"
 uvicorn = {extras = ["standard"], version = "^0.17.6"}
