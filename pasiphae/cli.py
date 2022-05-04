@@ -2,6 +2,7 @@ from pathlib import Path
 
 import click
 import graphql
+import itertools as it
 
 from . import file
 from .resolvers import generate_resolvers
@@ -39,7 +40,12 @@ def pasiphae(schema: Path, debug: bool, app: bool) -> None:
     for name, codeblocks in chain_generators(
         [("types", generate_types), ("resolvers", generate_resolvers)], parsed_schema
     ):
+        codeblocks, for_errors = it.tee(codeblocks)
+
         file.write(schema.parent, name, codeblocks)
+        for codeblock in for_errors:
+            if codeblock.warning:
+                click.echo(f"⚠️  {codeblock.warning}")
 
     if app:
         with open(schema.parent / "app.py", "w") as f:

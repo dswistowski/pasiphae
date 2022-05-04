@@ -1,0 +1,9 @@
+scalar SomeString
+scalar ADate
+scalar Number
+
+type Query {
+    string(something: String!): SomeString
+    date(param: SomeString!): ADate
+    number: Number
+}

@@ -49,3 +49,4 @@ class CodeBlock:
     body: str
     used_types: t.Sequence[PythonType] = d.field(default_factory=list)
     weight: int = sys.maxsize
+    warning: t.Optional[str] = None
