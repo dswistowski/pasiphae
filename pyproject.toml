@@ -30,12 +30,12 @@ python = ">=3.8,<4"
 
 click = "^8.0.3"
 graphql-core = "^3.1.6"
-black = "^21.10b0"
+black = ">=21.10,<23.0"
 isort = "^5.10.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
-black = "^21.10b0"
+black = ">=21.10,<23.0"
 ariadne = {git = "https://github.com/mirumee/ariadne", rev = "1cdc600431378be8c09f0d13428b56ee2451727a"}
 mypy = "^0.950"
 flake8 = "^4.0.1"
