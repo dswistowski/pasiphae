@@ -40,7 +40,7 @@ ariadne = {git = "https://github.com/mirumee/ariadne", rev = "1cdc600431378be8c0
 mypy = "^0.950"
 flake8 = "^4.0.1"
 Sphinx = "^4.5.0"
-coverage = "^6.3.2"
+coverage = "^6.4.2"
 isort = "^5.10.0"
 uvicorn = {extras = ["standard"], version = "^0.17.6"}
 
